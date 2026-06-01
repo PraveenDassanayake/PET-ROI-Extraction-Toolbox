@@ -342,23 +342,6 @@ This toolbox was developed using:
 
 ---
 
-## Suggested GitHub Topics
-
-```text
-pet
-neuroimaging
-medical-imaging
-spm12
-matlab
-python
-roi-extraction
-brain-imaging
-atlas-based-analysis
-gui-toolbox
-```
-
----
-
 ## Author
 
 Praveen Dassanayake
