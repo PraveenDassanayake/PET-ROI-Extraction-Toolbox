@@ -2,7 +2,7 @@
 
 A user-friendly Python GUI toolbox integrated with MATLAB SPM12 for atlas-based ROI extraction from preprocessed PET SUV brain images.
 
-This toolbox allows users to load multiple PET images, apply a brain atlas in MNI space, optionally apply a gray matter mask, and extract mean PET values for each ROI. The output is saved as a subject-by-ROI CSV table.
+This toolbox allows users to load multiple PET images, apply a brain atlas in MNI space, optionally apply a gray matter mask, and extract mean PET values for each region of interest (ROI). The output is saved as a subject-by-ROI CSV table that can be used for downstream statistical analysis, visualization, or correlation with biological and clinical variables.
 
 ---
 
@@ -10,37 +10,37 @@ This toolbox allows users to load multiple PET images, apply a brain atlas in MN
 
 Quantitative PET brain analysis often requires extracting regional values from anatomical or functional brain atlases. This process can be repetitive, time-consuming, and prone to manual errors when performed subject-by-subject.
 
-The PET ROI Extraction Toolbox simplifies this process by providing a graphical interface where users can:
+The PET ROI Extraction Toolbox simplifies this workflow by providing a graphical interface where users can:
 
-- Load multiple preprocessed PET SUV images
-- Load a brain atlas in MNI space
-- Optionally load a gray matter mask
-- Select specific ROI numbers or auto-detect all atlas labels
-- Extract mean PET values per ROI
-- Export results as a CSV table
-- Preview results inside the GUI
+* Load multiple preprocessed PET SUV images
+* Load a brain atlas in MNI space
+* Optionally load a gray matter mask
+* Select specific ROI numbers or automatically detect all atlas labels
+* Extract mean PET values per ROI
+* Export results as a CSV table
+* Preview results inside the GUI
+
+The toolbox is designed for researchers who want to perform standardized ROI-based PET quantification without manually editing scripts for each subject or atlas.
 
 ---
 
 ## Features
 
-- Python-based graphical user interface
-- MATLAB SPM12 backend for NIfTI image handling
-- Multiple-subject PET image loading
-- Custom atlas support
-- Automatic ROI label detection from atlas
-- Optional gray matter mask application
-- Manual ROI selection using comma-separated labels
-- Subject-wise ROI mean extraction
-- CSV export
-- Results preview inside the GUI
-- Progress/status updates during processing
+* Python-based graphical user interface
+* MATLAB SPM12 backend for NIfTI image handling
+* Multiple-subject PET image loading
+* Custom atlas support
+* Automatic ROI label detection from atlas
+* Optional gray matter mask application
+* Manual ROI selection using comma-separated labels
+* Subject-wise ROI mean extraction
+* CSV export
+* Results preview inside the GUI
+* Progress and status updates during processing
 
 ---
 
 ## Workflow
-
-The toolbox follows this general workflow:
 
 ```text
 Preprocessed PET SUV images
@@ -53,6 +53,9 @@ ROI extraction using MATLAB/SPM12
         ↓
 Subject-by-ROI CSV output
 ```
+
+---
+
 ## Input Requirements
 
 ### PET Images
@@ -81,7 +84,7 @@ The atlas should be:
 * In MNI space
 * A numerical label atlas
 * In NIfTI or Analyze format (`.nii` or `.img`)
-* Contain integer ROI labels
+* Structured using integer ROI labels
 
 Example atlas label structure:
 
@@ -128,10 +131,19 @@ subject_2,1.31,1.04,1.18
 subject_3,1.19,0.91,1.06
 ```
 
-The CSV output can be used for further statistical analysis, group comparisons, visualization, or correlation with biological and clinical variables.
+The CSV output can be used for:
 
-## Files
+* Statistical analysis
+* Group comparisons
+* Data visualization
+* Correlation with biological or clinical variables
+* Machine learning or downstream quantitative analysis
 
+---
+
+## Repository Structure
+
+```text
 PET-ROI-Extraction-Toolbox/
 │
 ├── pet_roi_gui.py          # Python GUI
@@ -141,95 +153,217 @@ PET-ROI-Extraction-Toolbox/
 ├── requirements.txt
 └── images/
     └── gui_screenshot.png
+```
+
+---
 
 ## Requirements
 
-Python 3.9–3.12
-MATLAB
-MATLAB Engine for Python
-SPM12
-Anaconda or another Python environment manager is recommended
-Python Packages
-pandas
-Pillow
-matlabengine
+### Software
+
+* Python 3.9–3.12
+* MATLAB
+* MATLAB Engine for Python
+* SPM12
+* Anaconda or another Python environment manager is recommended
+
+### Python Packages
+
+* pandas
+* Pillow
+* matlabengine
+
+Install the required Python packages using:
+
+```bash
+pip install pandas pillow matlabengine
+```
+
+If using conda:
+
+```bash
+conda install pandas pillow -y
+pip install matlabengine
+```
+
+You can also install packages from a `requirements.txt` file:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## MATLAB/SPM12 Setup
 
 Before running the toolbox, make sure SPM12 works inside MATLAB.
 
 In MATLAB:
 
+```matlab
 addpath('C:\spm12')
 savepath
 spm
+```
 
 If the SPM12 GUI opens, the setup is working.
 
-How to Run
-Open Anaconda Prompt.
-Activate your Python environment:
+---
+
+## How to Run
+
+### Option 1: Run from Anaconda Prompt
+
+1. Open Anaconda Prompt.
+
+2. Activate your Python environment:
+
+```bash
 conda activate spyder_spm
-Navigate to the toolbox folder:
+```
+
+3. Navigate to the toolbox folder:
+
+```bash
 cd "C:\Users\YourName\Documents\PET-ROI-Extraction-Toolbox"
-Run the GUI:
+```
+
+4. Run the GUI:
+
+```bash
 python pet_roi_gui.py
+```
 
-Alternatively, open pet_roi_gui.py in Spyder and run the script.
+### Option 2: Run from Spyder
 
-How to Use the GUI
-Click Load PET Images and select one or more preprocessed PET SUV images.
-Select an atlas in MNI space.
-Optionally select a gray matter mask.
-Choose an output CSV path.
-Enter ROI numbers separated by commas, or leave blank to auto-detect all atlas labels.
-Click Run ROI Extraction.
-The output table will be displayed in the preview panel and saved as a CSV file.
-ROI Selection
+1. Open Spyder using the same Python environment where MATLAB Engine is installed.
+2. Open `pet_roi_gui.py`.
+3. Run the script.
 
-Users can either:
+---
 
-Auto-detect all ROIs
+## How to Use the GUI
+
+1. Click **Load PET Images** and select one or more preprocessed PET SUV images.
+2. Select an atlas in MNI space.
+3. Optionally select a gray matter mask.
+4. Choose an output CSV path.
+5. Enter ROI numbers separated by commas, or leave blank to auto-detect all atlas labels.
+6. Click **Run ROI Extraction**.
+7. The output table will be displayed in the preview panel and saved as a CSV file.
+
+---
+
+## ROI Selection
+
+Users can choose between automatic ROI detection and manual ROI selection.
+
+### Auto-detect all ROIs
 
 Leave the ROI field blank.
 
 The toolbox will automatically detect all non-zero ROI labels from the atlas.
 
-Select specific ROIs
+### Select specific ROIs
 
 Enter ROI numbers separated by commas:
 
+```text
 1,2,3,4,5
+```
 
-## Important Notes
+Only the selected ROIs will be extracted.
 
-PET images, atlas, and optional mask must be in the same space.
-The atlas must contain numerical ROI labels.
-Label 0 is treated as background and ignored.
-If SPM12 cannot read an atlas due to datatype issues, convert the atlas to an SPM-compatible NIfTI format before using it.
-Large PET/MRI datasets should not be uploaded to GitHub.
-Example Use Case
+---
+
+## Example Use Case
 
 This toolbox can be used to extract regional PET SUV values from preprocessed brain PET images using atlases such as:
 
-AAL atlas
-Harvard-Oxford atlas
-Custom MNI-space brain atlases
+* AAL atlas
+* Harvard-Oxford atlas
+* Custom MNI-space brain atlases
 
-The resulting ROI table can be used for statistical analysis, group comparisons, or correlation with biological/clinical variables.
+The resulting ROI table can be used for statistical analysis, group comparisons, or correlation with biological and clinical variables.
+
+---
+
+## Important Notes
+
+* PET images, atlas, and optional mask must be in the same space.
+* PET images, atlas, and optional mask should have matching dimensions.
+* The atlas must contain numerical ROI labels.
+* Label `0` is treated as background and ignored.
+* If SPM12 cannot read an atlas due to datatype issues, convert the atlas to an SPM-compatible NIfTI format before using it.
+* Large PET/MRI datasets should not be uploaded to GitHub.
+* This toolbox is intended for research use and is not a clinical diagnostic tool.
+
+---
+
+## Troubleshooting
+
+### MATLAB Engine is not found
+
+Make sure MATLAB Engine is installed in the same Python environment used by Spyder or the terminal:
+
+```bash
+pip install matlabengine
+```
+
+### SPM12 is not detected
+
+Make sure SPM12 is added to the MATLAB path:
+
+```matlab
+addpath('C:\spm12')
+savepath
+```
+
+### Atlas datatype error
+
+Some atlases may use a NIfTI datatype that SPM12 cannot read. If this happens, convert the atlas to an SPM-compatible NIfTI format, such as `int16`.
+
+### PET, atlas, and mask dimension mismatch
+
+Make sure all input images are in the same space and resolution. If needed, reslice the atlas or mask to match the PET image dimensions before running ROI extraction.
+
+---
 
 ## Technical Concepts Used
 
 This toolbox was developed using:
 
-Python GUI programming: for the user interface
-MATLAB Engine for Python: to connect Python with MATLAB/SPM12
-SPM12: for NIfTI image loading and processing
-Automation: to reduce manual ROI extraction steps
-Multithreading: to keep the GUI responsive during long processing tasks
-CSV export: for easy downstream analysis
+* **Python GUI programming:** creates the user interface for file selection, parameter input, status updates, and result preview.
+* **MATLAB Engine for Python:** connects the Python GUI to MATLAB and allows the toolbox to run SPM12 commands.
+* **SPM12:** reads PET, atlas, and mask images and supports NIfTI-based neuroimaging workflows.
+* **Automation:** reduces manual ROI extraction steps by processing multiple subjects through one workflow.
+* **Multithreading:** keeps the GUI responsive while MATLAB/SPM12 processing runs in the background.
+* **CSV export:** saves extracted ROI values in a format that can be opened in Excel, R, Python, MATLAB, or statistical software.
+
+---
+
+## Suggested GitHub Topics
+
+```text
+pet
+neuroimaging
+medical-imaging
+spm12
+matlab
+python
+roi-extraction
+brain-imaging
+atlas-based-analysis
+gui-toolbox
+```
+
+---
 
 ## Author
 
 Praveen Dassanayake
+
+---
 
 ## Acknowledgement
 
