@@ -1,4 +1,4 @@
-# PET ROI Extraction Toolbox (SPM12)
+# PET ROI Extraction Toolbox
 
 A user-friendly Python GUI toolbox integrated with MATLAB SPM12 for atlas-based ROI extraction from preprocessed PET SUV brain images.
 
